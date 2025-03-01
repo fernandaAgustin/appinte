@@ -52,10 +52,6 @@ const Sidebar = ({ usuario, handleLogout }) => (
                     <ListItemIcon><ToggleOn sx={{ color: '#fff' }} /></ListItemIcon>
                     <ListItemText primary="Administrar Válvulas" />
                 </ListItemButton>
-                <ListItemButton component={Link} to="/estadisticas" sx={{ color: '#fff' }}>
-                    <ListItemIcon><BarChart sx={{ color: '#fff' }} /></ListItemIcon>
-                    <ListItemText primary="Ver estadísticas" />
-                </ListItemButton>
                 <ListItemButton onClick={handleLogout} sx={{ color: '#fff' }}>
                     <ListItemIcon><Logout sx={{ color: '#fff' }} /></ListItemIcon>
                     <ListItemText primary="Salir" />
@@ -263,12 +259,14 @@ const ValvulaList = () => {
                                     <TableCell sx={{ color: '#fff' }}>{valvula.estado}</TableCell>
                                     <TableCell sx={{ color: '#fff' }}>{new Date(valvula.fecha_instalacion).toLocaleDateString()}</TableCell>
                                     <TableCell>
-                                        <IconButton color="primary" onClick={() => redirigirEdicion(valvula.id)}>
-                                            <Edit sx={{ color: '#fff' }} />
-                                        </IconButton>
-                                        <IconButton color="error" onClick={() => handleDelete(valvula.id)}>
-                                            <Delete sx={{ color: '#fff' }} />
-                                        </IconButton>
+                                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                                            <IconButton color="primary" onClick={() => redirigirEdicion(valvula.id)}>
+                                                <Edit sx={{ color: '#fff' }} />
+                                            </IconButton>
+                                            <IconButton color="error" onClick={() => handleDelete(valvula.id)}>
+                                                <Delete sx={{ color: '#fff' }} />
+                                            </IconButton>
+                                        </Box>
                                     </TableCell>
                                 </TableRow>
                             ))}

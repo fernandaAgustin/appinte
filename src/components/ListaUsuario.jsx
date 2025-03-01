@@ -53,10 +53,6 @@ const Sidebar = ({ usuario, handleLogout }) => (
                     <ListItemIcon><ToggleOn sx={{ color: '#fff' }} /></ListItemIcon>
                     <ListItemText primary="Administrar Válvulas" />
                 </ListItemButton>
-                <ListItemButton component={Link} to="/estadisticas" sx={{ color: '#fff' }}>
-                    <ListItemIcon><BarChart sx={{ color: '#fff' }} /></ListItemIcon>
-                    <ListItemText primary="Ver estadísticas" />
-                </ListItemButton>
                 <ListItemButton onClick={handleLogout} sx={{ color: '#fff' }}>
                     <ListItemIcon><Logout sx={{ color: '#fff' }} /></ListItemIcon>
                     <ListItemText primary="Salir" />
@@ -235,7 +231,7 @@ const ListaUsuario = () => {
                         overflowY: 'auto',  // Agrega desplazamiento solo si es necesario
                     }}
                 >
-                    <Table className="user-table" sx={{ backgroundColor: '#1E1E1E', color: '#fff' }}>
+                    <Table sx={{ backgroundColor: '#1E1E1E', color: '#fff' }}>
                         <TableHead>
                             <TableRow>
                                 <TableCell sx={{ color: '#fff' }}>ID</TableCell>
@@ -257,12 +253,14 @@ const ListaUsuario = () => {
                                     <TableCell sx={{ color: '#fff' }}>{new Date(usuario.fecha_nacimiento).toLocaleDateString()}</TableCell>
                                     <TableCell sx={{ color: '#fff' }}>{usuario.sexo}</TableCell>
                                     <TableCell>
-                                        <IconButton color="error" onClick={() => handleDelete(usuario.id)}>
-                                            <Delete sx={{ color: '#fff' }} />
-                                        </IconButton>
-                                        <IconButton color="primary" component={Link} to={`/editUsuarios/${usuario.id}`}>
-                                            <Edit sx={{ color: '#fff' }} />
-                                        </IconButton>
+                                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                                            <IconButton color="primary" component={Link} to={`/editUsuarios/${usuario.id}`}>
+                                                <Edit sx={{ color: '#fff' }} />
+                                            </IconButton>
+                                            <IconButton color="error" onClick={() => handleDelete(usuario.id)}>
+                                                <Delete sx={{ color: '#fff' }} />
+                                            </IconButton>
+                                        </Box>
                                     </TableCell>
                                 </TableRow>
                             ))}

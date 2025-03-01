@@ -52,10 +52,6 @@ const Sidebar = ({ usuario, handleLogout }) => (
                     <ListItemIcon><ToggleOn sx={{ color: '#fff' }} /></ListItemIcon>
                     <ListItemText primary="Administrar Válvulas" />
                 </ListItemButton>
-                <ListItemButton component={Link} to="/estadisticas" sx={{ color: '#fff' }}>
-                    <ListItemIcon><BarChart sx={{ color: '#fff' }} /></ListItemIcon>
-                    <ListItemText primary="Ver estadísticas" />
-                </ListItemButton>
                 <ListItemButton onClick={handleLogout} sx={{ color: '#fff' }}>
                     <ListItemIcon><Logout sx={{ color: '#fff' }} /></ListItemIcon>
                     <ListItemText primary="Salir" />
@@ -261,16 +257,15 @@ const RiegoList = () => {
                                     <TableCell sx={{ color: '#fff' }}>{riego.duracion}</TableCell>
                                     <TableCell sx={{ color: '#fff' }}>{new Date(riego.fecha_riego).toLocaleDateString()}</TableCell>
                                     <TableCell>
-                                        <Box sx={{ display: 'flex', gap: 1 }}>
+                                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
                                             <IconButton color="primary" onClick={() => redirigirEdicion(riego.id)}>
-                                                <Edit />
+                                                <Edit sx={{ color: '#fff' }} />
                                             </IconButton>
                                             <IconButton color="error" onClick={() => eliminarRiego(riego.id)}>
-                                                <Delete />
+                                                <Delete sx={{ color: '#fff' }} />
                                             </IconButton>
                                         </Box>
                                     </TableCell>
-
                                 </TableRow>
                             ))}
                         </TableBody>
@@ -305,7 +300,7 @@ const RiegoList = () => {
                     variant="contained"
                     startIcon={<Add />}
                     component={Link}
-                    to="/nuevo-riego"
+                    to="/nuevoRiego"
                     sx={{
                         mt: 4, // Added margin-top for better spacing
                         backgroundColor: '#2C3E50',

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // 1️⃣ Importa useNavigate
-import '../estilo.css'
+import '../estilo.css';
 
 const ValvulaForm = () => {
     const navigate = useNavigate(); // 2️⃣ Define el hook
@@ -32,40 +32,52 @@ const ValvulaForm = () => {
         }
     };
 
+    const cancelarFormulario = () => {
+        navigate(-1); // Redirige a la página anterior cuando se cancela
+    };
+
     return (
-        <form onSubmit={crearValvula}>
+        <div className="form-container">
             <h2>Crear Válvula</h2>
-            <input
-                type="text"
-                placeholder="Nombre"
-                value={nombre}
-                onChange={(e) => setNombre(e.target.value)}
-                required
-            />
-            <input
-                type="text"
-                placeholder="Ubicación"
-                value={ubicacion}
-                onChange={(e) => setUbicacion(e.target.value)}
-                required
-            />
-            <input
-                type="text"
-                placeholder="Estado"
-                value={estado}
-                onChange={(e) => setEstado(e.target.value)}
-                required
-            />
-            <input
-                type="date"
-                value={fechaInstalacion}
-                onChange={(e) => setFechaInstalacion(e.target.value)}
-                required
-            />
-            <button type="submit">Crear</button>
-        </form>
+            <form onSubmit={crearValvula}>
+                <input
+                    type="text"
+                    placeholder="Nombre"
+                    value={nombre}
+                    onChange={(e) => setNombre(e.target.value)}
+                    required
+                    className="form-input"
+                />
+                <input
+                    type="text"
+                    placeholder="Ubicación"
+                    value={ubicacion}
+                    onChange={(e) => setUbicacion(e.target.value)}
+                    required
+                    className="form-input"
+                />
+                <input
+                    type="text"
+                    placeholder="Estado"
+                    value={estado}
+                    onChange={(e) => setEstado(e.target.value)}
+                    required
+                    className="form-input"
+                />
+                <input
+                    type="date"
+                    value={fechaInstalacion}
+                    onChange={(e) => setFechaInstalacion(e.target.value)}
+                    required
+                    className="form-input"
+                />
+                <div className="form-buttons">
+                    <button type="submit" className="submit-btn">Crear</button>
+                    <button type="button" onClick={cancelarFormulario} className="cancel-btn">Cancelar</button>
+                </div>
+            </form>
+        </div>
     );
 };
 
 export default ValvulaForm;
-

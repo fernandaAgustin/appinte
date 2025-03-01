@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
-import '../estilo.css'
+import '../estilo.css';
 
 const ValvulaEdit = () => {
     const { id } = useParams();
@@ -42,10 +42,14 @@ const ValvulaEdit = () => {
         try {
             await axios.put(`http://localhost:3000/api/valvulas/${id}`, datosActualizados);
             alert('Válvula actualizada con éxito');
-            navigate('/valvula');
+            navigate('/valvula');  // Redirigir a la página de lista de válvulas o la página deseada
         } catch (error) {
             console.error('Error al actualizar la válvula:', error);
         }
+    };
+
+    const cancelarEdicion = () => {
+        navigate(-1);  // Regresar a la página anterior si el usuario cancela
     };
 
     useEffect(() => {
@@ -53,37 +57,47 @@ const ValvulaEdit = () => {
     }, []);
 
     return (
-        <form onSubmit={actualizarValvula}>
+        <div className="form-container">
             <h2>Editar Válvula</h2>
-            <input
-                type="text"
-                placeholder="Nombre"
-                value={nombre}
-                onChange={(e) => setNombre(e.target.value)}
-                required
-            />
-            <input
-                type="text"
-                placeholder="Ubicación"
-                value={ubicacion}
-                onChange={(e) => setUbicacion(e.target.value)}
-                required
-            />
-            <input
-                type="text"
-                placeholder="Estado"
-                value={estado}
-                onChange={(e) => setEstado(e.target.value)}
-                required
-            />
-            <input
-                type="date"
-                value={fechaInstalacion}
-                onChange={(e) => setFechaInstalacion(e.target.value)}
-                required
-            />
-            <button type="submit">Actualizar</button>
-        </form>
+            <form onSubmit={actualizarValvula}>
+                <input
+                    type="text"
+                    placeholder="Nombre"
+                    value={nombre}
+                    onChange={(e) => setNombre(e.target.value)}
+                    required
+                    className="form-input"
+                />
+                <input
+                    type="text"
+                    placeholder="Ubicación"
+                    value={ubicacion}
+                    onChange={(e) => setUbicacion(e.target.value)}
+                    required
+                    className="form-input"
+                />
+                <input
+                    type="text"
+                    placeholder="Estado"
+                    value={estado}
+                    onChange={(e) => setEstado(e.target.value)}
+                    required
+                    className="form-input"
+                />
+                <input
+                    type="date"
+                    value={fechaInstalacion}
+                    onChange={(e) => setFechaInstalacion(e.target.value)}
+                    required
+                    className="form-input"
+                />
+                <div className="form-buttons">
+                    <button type="submit" className="submit-btn">Actualizar</button>
+                    <button type="button" onClick={cancelarEdicion} className="cancel-btn">Cancelar</button>
+                </div>
+            </form>
+        </div>
+
     );
 };
 

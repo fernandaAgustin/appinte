@@ -44,7 +44,7 @@ const SensorEdit = () => {
         try {
             await axios.put(`http://localhost:3000/api/sensores/${id}`, datosActualizados);
             alert('Sensor actualizado con éxito');
-            navigate('/sensores');
+            navigate(-1); // Regresa a la página anterior
         } catch (error) {
             console.error('Error al actualizar el sensor:', error);
         }
@@ -55,7 +55,7 @@ const SensorEdit = () => {
     }, []);
 
     return (
-        <div>
+        <div className="form-container">
             <h2>Editar Sensor</h2>
             <form onSubmit={actualizarSensor}>
                 <input
@@ -64,6 +64,7 @@ const SensorEdit = () => {
                     value={nombre}
                     onChange={(e) => setNombre(e.target.value)}
                     required
+                    className="form-input"
                 />
                 <input
                     type="text"
@@ -71,19 +72,25 @@ const SensorEdit = () => {
                     value={tipo}
                     onChange={(e) => setTipo(e.target.value)}
                     required
+                    className="form-input"
                 />
                 <input
                     type="text"
                     placeholder="Ubicación"
                     value={ubicacion}
                     onChange={(e) => setUbicacion(e.target.value)}
+                    className="form-input"
                 />
                 <input
                     type="date"
                     value={fechaInstalacion}
                     onChange={(e) => setFechaInstalacion(e.target.value)}
+                    className="form-input"
                 />
-                <button type="submit">Actualizar</button>
+                <div className="form-buttons">
+                    <button type="submit" className="submit-btn">Actualizar</button>
+                    <button type="button" onClick={() => navigate(-1)} className="cancel-btn">Cancelar</button>
+                </div>
             </form>
         </div>
     );

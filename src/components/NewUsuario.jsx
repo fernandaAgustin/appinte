@@ -59,7 +59,7 @@ const NewUsuario = () => {
 
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
-            <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
+            <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md w-full max-w-md border-2 border-gray-300">
                 <h2 className="text-2xl font-bold mb-4 text-center">Registro</h2>
                 {error && <div className="bg-red-100 text-red-700 p-2 rounded mb-2">{error}</div>}
                 {successMessage && <div className="bg-green-100 text-green-700 p-2 rounded mb-2">{successMessage}</div>}

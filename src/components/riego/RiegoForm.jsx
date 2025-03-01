@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../estilo.css'
+import { useNavigate } from 'react-router-dom';
+import '../estilo.css';
 
 const RiegoForm = () => {
+    const navigate = useNavigate();
     const [valvulaId, setValvulaId] = useState('');
     const [cantidadAgua, setCantidadAgua] = useState('');
     const [duracion, setDuracion] = useState('');
@@ -20,17 +22,14 @@ const RiegoForm = () => {
         try {
             await axios.post('http://localhost:3000/api/riegos', nuevoRiego);
             alert('Riego creado con éxito');
-            setValvulaId('');
-            setCantidadAgua('');
-            setDuracion('');
-            setFechaRiego('');
+            navigate(-1); // Regresa a la página anterior
         } catch (error) {
             console.error('Error al crear el riego:', error);
         }
     };
 
     return (
-        <form onSubmit={crearRiego}>
+        <form onSubmit={crearRiego} className="form-container">
             <h2>Crear Riego</h2>
             <input
                 type="text"
@@ -38,6 +37,7 @@ const RiegoForm = () => {
                 value={valvulaId}
                 onChange={(e) => setValvulaId(e.target.value)}
                 required
+                className="form-input"
             />
             <input
                 type="number"
@@ -45,6 +45,7 @@ const RiegoForm = () => {
                 value={cantidadAgua}
                 onChange={(e) => setCantidadAgua(e.target.value)}
                 required
+                className="form-input"
             />
             <input
                 type="number"
@@ -52,14 +53,19 @@ const RiegoForm = () => {
                 value={duracion}
                 onChange={(e) => setDuracion(e.target.value)}
                 required
+                className="form-input"
             />
             <input
                 type="date"
                 value={fechaRiego}
                 onChange={(e) => setFechaRiego(e.target.value)}
                 required
+                className="form-input"
             />
-            <button type="submit">Crear</button>
+            <div className="form-buttons">
+                <button type="submit" className="submit-btn">Crear</button>
+                <button type="button" onClick={() => navigate(-1)} className="cancel-btn">Cancelar</button>
+            </div>
         </form>
     );
 };

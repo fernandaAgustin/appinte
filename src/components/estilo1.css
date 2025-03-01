@@ -1,0 +1,118 @@
+/* Fondo general */
+body {
+    background-color: #f4f6f8;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+}
+
+/* Barra lateral */
+.MuiDrawer-paper {
+    background-color: #f4f6f8 !important;
+}
+
+.MuiDrawer-root {
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Avatar del usuario */
+.MuiAvatar-root {
+    border-radius: 50%;
+    border: 3px solid #1976d2;
+}
+
+/* Estilo de la tarjeta de perfil */
+.MuiPaper-root {
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+/* Encabezados */
+.MuiTypography-h4 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1976d2;
+    margin-bottom: 20px;
+}
+
+/* Listas y botones */
+.MuiListItemButton {
+    border-radius: 8px;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.MuiListItemButton:hover {
+    background-color: #1565c0;
+}
+
+.MuiListItemButton.Mui-selected {
+    background-color: #1976d2 !important;
+}
+
+.MuiListItemText-root {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.MuiListItemIcon-root {
+    color: #1976d2;
+}
+
+/* Barra superior */
+.MuiAppBar-root {
+    background-color: #1976d2;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.MuiToolbar-root {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.MuiTypography-h6 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* Cargando y error */
+.cargando {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    color: #1976d2;
+}
+
+.error {
+    color: red;
+    text-align: center;
+    font-size: 18px;
+}
+
+/* Estilos de botones */
+.MuiListItemButton.Mui-selected {
+    background-color: #1976d2 !important;
+}
+
+.MuiListItemButton .MuiListItemIcon-root {
+    color: white;
+}
+
+.MuiListItemButton .MuiListItemText-primary {
+    color: white;
+}
+
+.MuiListItemButton:hover {
+    background-color: #1565c0;
+}
+
+.MuiListItemButton.MuiListItemButton-root {
+    background-color: #f44336;
+}
+
+.MuiListItemButton .MuiListItemIcon-root {
+    color: white;
+}

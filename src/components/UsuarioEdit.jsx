@@ -50,7 +50,7 @@ const UsuarioEdit = () => {
     };
 
     const handleCancel = () => {
-        navigate("/usuarios"); // Redirige a la página principal
+        navigate(-1); // Redirige a la página anterior
     };
 
     const isPasswordValid = (password) => {
@@ -91,7 +91,7 @@ const UsuarioEdit = () => {
                 headers: { "Content-Type": "multipart/form-data" },
             });
             setSuccessMessage(response.data.message);
-            setTimeout(() => navigate("/usuarios"), 2000); // Redirige después de la actualización
+            navigate(-1);// Redirige después de la actualización
         } catch (error) {
             setError(error.response ? error.response.data.error : "Error al actualizar usuario");
         }
@@ -99,7 +99,7 @@ const UsuarioEdit = () => {
 
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
-            <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
+            <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md w-full max-w-md border-2 border-gray-300">
                 <h2 className="text-2xl font-bold mb-4 text-center">Editar Usuario</h2>
                 {error && <div className="bg-red-100 text-red-700 p-2 rounded mb-2">{error}</div>}
                 {successMessage && <div className="bg-green-100 text-green-700 p-2 rounded mb-2">{successMessage}</div>}

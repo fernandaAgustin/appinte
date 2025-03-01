@@ -52,10 +52,6 @@ const Sidebar = ({ usuario, handleLogout }) => (
                     <ListItemIcon><ToggleOn sx={{ color: '#fff' }} /></ListItemIcon>
                     <ListItemText primary="Administrar Válvulas" />
                 </ListItemButton>
-                <ListItemButton component={Link} to="/estadisticas" sx={{ color: '#fff' }}>
-                    <ListItemIcon><BarChart sx={{ color: '#fff' }} /></ListItemIcon>
-                    <ListItemText primary="Ver estadísticas" />
-                </ListItemButton>
                 <ListItemButton onClick={handleLogout} sx={{ color: '#fff' }}>
                     <ListItemIcon><Logout sx={{ color: '#fff' }} /></ListItemIcon>
                     <ListItemText primary="Salir" />
@@ -258,12 +254,14 @@ const SensorList = () => {
                                     <TableCell sx={{ color: '#fff' }}>{sensor.ubicacion}</TableCell>
                                     <TableCell sx={{ color: '#fff' }}>{new Date(sensor.fecha_instalacion).toLocaleDateString()}</TableCell>
                                     <TableCell>
-                                        <IconButton onClick={() => navigate(`/editSensores/${sensor.id}`)}>
-                                            <Edit sx={{ color: '#fff' }} />
-                                        </IconButton>
-                                        <IconButton onClick={() => handleDelete(sensor.id)}>
-                                            <Delete sx={{ color: '#fff' }} />
-                                        </IconButton>
+                                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                                            <IconButton onClick={() => navigate(`/editSensores/${sensor.id}`)}>
+                                                <Edit sx={{ color: '#fff' }} />
+                                            </IconButton>
+                                            <IconButton onClick={() => handleDelete(sensor.id)}>
+                                                <Delete sx={{ color: '#fff' }} />
+                                            </IconButton>
+                                        </Box>
                                     </TableCell>
                                 </TableRow>
                             ))}

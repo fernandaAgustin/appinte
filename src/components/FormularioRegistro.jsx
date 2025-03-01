@@ -1,7 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "../css/FormularioRegistro.css";
 
 const FormularioRegistro = () => {
     const navigate = useNavigate();
@@ -85,6 +84,95 @@ const FormularioRegistro = () => {
                     <button type="button" onClick={handleCancel} className="w-full bg-gray-500 text-white p-2 rounded hover:bg-gray-600 transition">Cancelar</button>
                 </div>
             </form>
+
+            {/* Aquí se incluye el CSS dentro de la etiqueta <style> */}
+            <style jsx>{`
+                /* Estilos generales del formulario */
+                .form-container {
+                    background-color: #1D1D1D;
+                    padding: 20px;
+                    border-radius: 15px;
+                    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                    width: 100%;
+                    max-width: 600px;
+                    margin: 0 auto;
+                }
+
+                .form-container h2 {
+                    text-align: center;
+                    color: #99b0e2;
+                    font-size: 1.8rem;
+                    margin-bottom: 20px;
+                }
+
+                /* Estilo de los inputs */
+                .form-input {
+                    background-color: #333;
+                    color: white;
+                    border: 1px solid #444;
+                    padding: 12px;
+                    margin-bottom: 15px;
+                    border-radius: 8px;
+                    width: 100%;
+                    font-size: 14px;
+                    transition: background-color 0.3s ease;
+                }
+
+                .form-input:focus {
+                    background-color: #444;
+                    outline: none;
+                }
+
+                /* Estilo de los botones */
+                .form-buttons {
+                    display: flex;
+                    justify-content: space-between;
+                    gap: 10px;
+                }
+
+                .submit-btn, .cancel-btn {
+                    background-color: #2C3E50;
+                    color: white;
+                    padding: 12px 18px;
+                    border-radius: 8px;
+                    font-size: 14px;
+                    cursor: pointer;
+                    transition: background-color 0.3s ease, transform 0.3s ease;
+                    width: 48%;
+                }
+
+                .submit-btn:hover, .cancel-btn:hover {
+                    background-color: #34495E;
+                    transform: scale(1.05);
+                }
+
+                .cancel-btn {
+                    background-color: #072441;
+                }
+
+                .cancel-btn:hover {
+                    background-color: #2b8ec0;
+                }
+
+                /* Mensajes de error y éxito */
+                .error-message, .success-message {
+                    text-align: center;
+                    padding: 10px;
+                    margin-bottom: 10px;
+                    border-radius: 5px;
+                    font-size: 14px;
+                }
+
+                .error-message {
+                    background-color: #e74c3c;
+                    color: white;
+                }
+
+                .success-message {
+                    background-color: #2ecc71;
+                    color: white;
+                }
+                `}</style>
         </div>
     );
 };

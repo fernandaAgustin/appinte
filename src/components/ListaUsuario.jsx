@@ -88,6 +88,7 @@ const Sidebar = ({ usuario, handleLogout }) => (
                     <ListItemIcon><ToggleOn sx={{ color: 'white' }} /></ListItemIcon>
                     <ListItemText primary="Administrar Válvulas" sx={{ color: 'white' }} />
                 </ListItemButton>
+<<<<<<< HEAD
                 <ListItemButton onClick={handleLogout} sx={{
                     '&:hover': {
                         transform: 'scale(1.15)',
@@ -97,6 +98,11 @@ const Sidebar = ({ usuario, handleLogout }) => (
                 }}>
                     <ListItemIcon><Logout sx={{ color: 'white' }} /></ListItemIcon>
                     <ListItemText primary="Cerrar sesión" sx={{ color: 'white' }} />
+=======
+                <ListItemButton onClick={handleLogout} sx={{ color: '#fff' }}>
+                    <ListItemIcon><Logout sx={{ color: '#fff' }} /></ListItemIcon>
+                    <ListItemText primary="Salir" />
+>>>>>>> dfe6f50d8f1790ae81823ba127caadcd9d52de9e
                 </ListItemButton>
             </List>
         </Box>
@@ -280,7 +286,11 @@ const ListaUsuario = () => {
                         overflowY: 'auto',
                     }}
                 >
+<<<<<<< HEAD
                     <Table sx={{ backgroundColor: "rgba(0, 0, 0, 0.1)", color: 'black', borderCollapse: 'collapse'  }}>
+=======
+                    <Table sx={{ backgroundColor: '#1E1E1E', color: '#fff' }}>
+>>>>>>> dfe6f50d8f1790ae81823ba127caadcd9d52de9e
                         <TableHead>
                             <TableRow sx={{ backgroundColor: 'transparent' }}>
                                 <TableCell sx={{ color: '#fff', fontWeight: 'bold', backgroundColor: '#04242' }}>ID</TableCell>
@@ -294,6 +304,7 @@ const ListaUsuario = () => {
                         </TableHead>
                         <TableBody>
                             {currentUsuarios.map(usuario => (
+<<<<<<< HEAD
                                 <TableRow key={usuario.id} sx={{ backgroundColor: 'transparent' }}>
                                     <TableCell sx={{ color: 'black', backgroundColor: 'transparent' }}>{usuario.id}</TableCell>
                                     <TableCell sx={{ color: 'black', backgroundColor: 'transparent' }}>{usuario.nombre}</TableCell>
@@ -308,6 +319,22 @@ const ListaUsuario = () => {
                                             </IconButton>
                                             <IconButton color="error" onClick={() => handleDelete(usuario.id)}>
                                                 <DeleteForever sx={{ color: 'white' }} />
+=======
+                                <TableRow key={usuario.id}>
+                                    <TableCell sx={{ color: '#fff' }}>{usuario.id}</TableCell>
+                                    <TableCell sx={{ color: '#fff' }}>{usuario.nombre}</TableCell>
+                                    <TableCell sx={{ color: '#fff' }}>{usuario.correo}</TableCell>
+                                    <TableCell sx={{ color: '#fff' }}>{usuario.rol}</TableCell>
+                                    <TableCell sx={{ color: '#fff' }}>{new Date(usuario.fecha_nacimiento).toLocaleDateString()}</TableCell>
+                                    <TableCell sx={{ color: '#fff' }}>{usuario.sexo}</TableCell>
+                                    <TableCell>
+                                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                                            <IconButton color="primary" component={Link} to={`/editUsuarios/${usuario.id}`}>
+                                                <Edit sx={{ color: '#fff' }} />
+                                            </IconButton>
+                                            <IconButton color="error" onClick={() => handleDelete(usuario.id)}>
+                                                <Delete sx={{ color: '#fff' }} />
+>>>>>>> dfe6f50d8f1790ae81823ba127caadcd9d52de9e
                                             </IconButton>
                                         </Box>
                                     </TableCell>

@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+<<<<<<< HEAD
 import { useNavigate } from 'react-router-dom';
 import { TextField, Button, Box, Typography, Grid, Alert, Zoom, InputAdornment } from '@mui/material';
 import { Build, LocationOn, CheckCircle, CalendarToday } from '@mui/icons-material';
+=======
+import { useNavigate } from 'react-router-dom'; // 1️⃣ Importa useNavigate
+>>>>>>> dfe6f50d8f1790ae81823ba127caadcd9d52de9e
 import '../estilo.css';
 
 const ValvulaForm = () => {
@@ -34,6 +38,7 @@ const ValvulaForm = () => {
     };
 
     const cancelarFormulario = () => {
+<<<<<<< HEAD
         // Redirige al usuario a la página de válvulas o limpia el formulario
         navigate('/valvula'); // o puedes usar `setNombre('')` y otros para resetear el formulario
     };
@@ -180,6 +185,52 @@ const ValvulaForm = () => {
                 </Box>
             </Zoom>
         </Box>
+=======
+        navigate(-1); // Redirige a la página anterior cuando se cancela
+    };
+
+    return (
+        <div className="form-container">
+            <h2>Crear Válvula</h2>
+            <form onSubmit={crearValvula}>
+                <input
+                    type="text"
+                    placeholder="Nombre"
+                    value={nombre}
+                    onChange={(e) => setNombre(e.target.value)}
+                    required
+                    className="form-input"
+                />
+                <input
+                    type="text"
+                    placeholder="Ubicación"
+                    value={ubicacion}
+                    onChange={(e) => setUbicacion(e.target.value)}
+                    required
+                    className="form-input"
+                />
+                <input
+                    type="text"
+                    placeholder="Estado"
+                    value={estado}
+                    onChange={(e) => setEstado(e.target.value)}
+                    required
+                    className="form-input"
+                />
+                <input
+                    type="date"
+                    value={fechaInstalacion}
+                    onChange={(e) => setFechaInstalacion(e.target.value)}
+                    required
+                    className="form-input"
+                />
+                <div className="form-buttons">
+                    <button type="submit" className="submit-btn">Crear</button>
+                    <button type="button" onClick={cancelarFormulario} className="cancel-btn">Cancelar</button>
+                </div>
+            </form>
+        </div>
+>>>>>>> dfe6f50d8f1790ae81823ba127caadcd9d52de9e
     );
 };
 

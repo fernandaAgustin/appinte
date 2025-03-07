@@ -45,7 +45,7 @@ const SensorEdit = () => {
         try {
             await axios.put(`http://localhost:3000/api/sensores/${id}`, datosActualizados);
             alert('Sensor actualizado con éxito');
-            navigate('/sensores');
+            navigate(-1); // Regresa a la página anterior
         } catch (error) {
             console.error('Error al actualizar el sensor:', error);
         }
@@ -60,6 +60,7 @@ const SensorEdit = () => {
     }, []);
 
     return (
+<<<<<<< HEAD
         <Zoom in={true} timeout={1000}>
             <Container
                 maxWidth="sm"
@@ -164,6 +165,46 @@ const SensorEdit = () => {
                 </form>
             </Container>
         </Zoom>
+=======
+        <div className="form-container">
+            <h2>Editar Sensor</h2>
+            <form onSubmit={actualizarSensor}>
+                <input
+                    type="text"
+                    placeholder="Nombre"
+                    value={nombre}
+                    onChange={(e) => setNombre(e.target.value)}
+                    required
+                    className="form-input"
+                />
+                <input
+                    type="text"
+                    placeholder="Tipo"
+                    value={tipo}
+                    onChange={(e) => setTipo(e.target.value)}
+                    required
+                    className="form-input"
+                />
+                <input
+                    type="text"
+                    placeholder="Ubicación"
+                    value={ubicacion}
+                    onChange={(e) => setUbicacion(e.target.value)}
+                    className="form-input"
+                />
+                <input
+                    type="date"
+                    value={fechaInstalacion}
+                    onChange={(e) => setFechaInstalacion(e.target.value)}
+                    className="form-input"
+                />
+                <div className="form-buttons">
+                    <button type="submit" className="submit-btn">Actualizar</button>
+                    <button type="button" onClick={() => navigate(-1)} className="cancel-btn">Cancelar</button>
+                </div>
+            </form>
+        </div>
+>>>>>>> dfe6f50d8f1790ae81823ba127caadcd9d52de9e
     );
 };
 

@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+<<<<<<< HEAD
 import { Button, TextField, Box, Typography, Grid, Alert, Zoom, InputAdornment } from '@mui/material';
 import { ArrowBack, WaterDrop, AccessTime, CalendarToday } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+=======
+import { useNavigate } from 'react-router-dom';
+import '../estilo.css';
+>>>>>>> dfe6f50d8f1790ae81823ba127caadcd9d52de9e
 
 const RiegoForm = () => {
     const navigate = useNavigate();
@@ -24,12 +29,17 @@ const RiegoForm = () => {
 
         try {
             await axios.post('http://localhost:3000/api/riegos', nuevoRiego);
+<<<<<<< HEAD
             setSuccessMessage('Riego creado con éxito');
             setTimeout(() => navigate('/riego'), 2000);
             setValvulaId('');
             setCantidadAgua('');
             setDuracion('');
             setFechaRiego('');
+=======
+            alert('Riego creado con éxito');
+            navigate(-1); // Regresa a la página anterior
+>>>>>>> dfe6f50d8f1790ae81823ba127caadcd9d52de9e
         } catch (error) {
             setError('Error al crear el riego');
         }
@@ -40,6 +50,7 @@ const RiegoForm = () => {
     };
 
     return (
+<<<<<<< HEAD
         <Box
             display="flex"
             justifyContent="center"
@@ -177,6 +188,46 @@ const RiegoForm = () => {
                 </Box>
             </Zoom>
         </Box>
+=======
+        <form onSubmit={crearRiego} className="form-container">
+            <h2>Crear Riego</h2>
+            <input
+                type="text"
+                placeholder="Válvula ID"
+                value={valvulaId}
+                onChange={(e) => setValvulaId(e.target.value)}
+                required
+                className="form-input"
+            />
+            <input
+                type="number"
+                placeholder="Cantidad de Agua (L)"
+                value={cantidadAgua}
+                onChange={(e) => setCantidadAgua(e.target.value)}
+                required
+                className="form-input"
+            />
+            <input
+                type="number"
+                placeholder="Duración (min)"
+                value={duracion}
+                onChange={(e) => setDuracion(e.target.value)}
+                required
+                className="form-input"
+            />
+            <input
+                type="date"
+                value={fechaRiego}
+                onChange={(e) => setFechaRiego(e.target.value)}
+                required
+                className="form-input"
+            />
+            <div className="form-buttons">
+                <button type="submit" className="submit-btn">Crear</button>
+                <button type="button" onClick={() => navigate(-1)} className="cancel-btn">Cancelar</button>
+            </div>
+        </form>
+>>>>>>> dfe6f50d8f1790ae81823ba127caadcd9d52de9e
     );
 };
 

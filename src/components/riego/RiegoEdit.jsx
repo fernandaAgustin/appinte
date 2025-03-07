@@ -19,8 +19,14 @@ const RiegoEdit = () => {
         try {
             const response = await axios.get(`http://localhost:3000/api/riegos/${id}`);
             const riego = response.data;
+<<<<<<< HEAD
             // Convertir fecha al formato YYYY-MM-DD
             const fechaFormateada = riego.fecha_riego.split('T')[0];
+=======
+
+            // Convertir fecha al formato YYYY-MM-DD
+            const fechaFormateada = riego.fecha_riego.split('T')[0]; 
+>>>>>>> dfe6f50d8f1790ae81823ba127caadcd9d52de9e
 
             setValvulaId(riego.valvula_id);
             setCantidadAgua(riego.cantidad_agua);
@@ -42,8 +48,14 @@ const RiegoEdit = () => {
 
         try {
             await axios.put(`http://localhost:3000/api/riegos/${id}`, datosActualizados);
+<<<<<<< HEAD
             setSuccessMessage('Riego actualizado con éxito');
             setTimeout(() => navigate('/riego'), 2000);
+=======
+            alert('Riego actualizado con éxito');
+            // Regresa a la página anterior
+            navigate(-1);
+>>>>>>> dfe6f50d8f1790ae81823ba127caadcd9d52de9e
         } catch (error) {
             setError('Error al actualizar el riego');
         }
@@ -58,6 +70,7 @@ const RiegoEdit = () => {
     }, []);
 
     return (
+<<<<<<< HEAD
         <Box
             display="flex"
             justifyContent="center"
@@ -195,6 +208,47 @@ const RiegoEdit = () => {
                 </Box>
             </Zoom>
         </Box>
+=======
+        <form onSubmit={actualizarRiego} className="form-container">
+            <h2>Editar Riego</h2>
+            <input
+                type="text"
+                placeholder="Válvula ID"
+                value={valvulaId}
+                onChange={(e) => setValvulaId(e.target.value)}
+                required
+                className="form-input"
+            />
+            <input
+                type="number"
+                placeholder="Cantidad de Agua (L)"
+                value={cantidadAgua}
+                onChange={(e) => setCantidadAgua(e.target.value)}
+                required
+                className="form-input"
+            />
+            <input
+                type="number"
+                placeholder="Duración (min)"
+                value={duracion}
+                onChange={(e) => setDuracion(e.target.value)}
+                required
+                className="form-input"
+            />
+            <input
+                type="date"
+                value={fechaRiego}
+                onChange={(e) => setFechaRiego(e.target.value)}
+                required
+                className="form-input"
+            />
+            <div className="form-buttons">
+                <button type="submit" className="submit-btn">Actualizar</button>
+                <button type="button" onClick={() => navigate(-1)} className="cancel-btn">Cancelar</button>
+            </div>
+        </form>
+
+>>>>>>> dfe6f50d8f1790ae81823ba127caadcd9d52de9e
     );
 };
 

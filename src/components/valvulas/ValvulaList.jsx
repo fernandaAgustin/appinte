@@ -85,6 +85,7 @@ const Sidebar = ({ usuario, handleLogout }) => (
                     <ListItemIcon><ToggleOn sx={{ color: 'white' }} /></ListItemIcon>
                     <ListItemText primary="Administrar Válvulas" sx={{ color: 'white' }} />
                 </ListItemButton>
+<<<<<<< HEAD
                 <ListItemButton onClick={handleLogout} sx={{
                     '&:hover': {
                         transform: 'scale(1.15)',
@@ -94,6 +95,11 @@ const Sidebar = ({ usuario, handleLogout }) => (
                 }}>
                     <ListItemIcon><Logout sx={{ color: 'white' }} /></ListItemIcon>
                     <ListItemText primary="Cerrar sesión" sx={{ color: 'white' }} />
+=======
+                <ListItemButton onClick={handleLogout} sx={{ color: '#fff' }}>
+                    <ListItemIcon><Logout sx={{ color: '#fff' }} /></ListItemIcon>
+                    <ListItemText primary="Salir" />
+>>>>>>> dfe6f50d8f1790ae81823ba127caadcd9d52de9e
                 </ListItemButton>
             </List>
         </Box>

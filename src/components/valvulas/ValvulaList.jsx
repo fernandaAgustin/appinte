@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Box, Drawer, AppBar, Toolbar, Typography, IconButton, Avatar, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Pagination, TextField } from "@mui/material";
-import { People, Speed, Opacity, ToggleOn, BarChart, Logout, Add, Edit, Delete, CloudUpload } from "@mui/icons-material";
+import { People, Speed, Opacity, ToggleOn, BarChart, Logout, Add, Edit, Delete, CloudUpload, Home } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
 import UploadExcel from "./UploadExcel";
-import '../estilo.css';
+import ValvulaGraficas from "./ValvulaGraficas";
+import backgroundImage from "../../img/fondo.jpeg";
 
 const drawerWidth = 240;
 
@@ -14,51 +15,85 @@ const Sidebar = ({ usuario, handleLogout }) => (
         sx={{
             width: drawerWidth,
             flexShrink: 0,
-            backgroundColor: '#212121', // Fondo gris oscuro
             '& .MuiDrawer-paper': {
                 width: drawerWidth,
                 boxSizing: 'border-box',
-                backgroundColor: '#212121', // Fondo gris oscuro
-                color: '#fff', // Texto blanco
+                backgroundImage: `url(${backgroundImage})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundAttachment: "fixed",
+                backgroundRepeat: "no-repeat",
+                color: 'white'
             },
         }}
     >
-        <Toolbar />
-        <Box sx={{ overflow: 'auto', color: '#fff' }}>
+        <Box sx={{}}>
             <List>
-                <ListItem>
-                    <Avatar src={`http://localhost:3000/uploads/${usuario.foto}`} alt={usuario.nombre} />
+                <ListItem sx={{ justifyContent: 'center' }}>
+                    <Avatar src={`http://localhost:3000/uploads/${usuario.foto}`} alt={usuario.nombre} sx={{ width: 80, height: 80 }} />
                 </ListItem>
-                <ListItem>
-                    <Typography variant="h6" sx={{ color: '#fff' }}>{usuario.nombre}</Typography>
+                <ListItem sx={{ justifyContent: 'center' }}>
+                    <Typography sx={{ color: 'white', fontWeight: 'bold', }}>{usuario.nombre}</Typography>
                 </ListItem>
-                <ListItemButton component={Link} to="/perfil" sx={{ color: '#fff' }}>
-                    <ListItemIcon><People sx={{ color: '#fff' }} /></ListItemIcon>
-                    <ListItemText primary="Dashboard" />
+                <ListItemButton component="a" href="/perfil" sx={{
+                    '&:hover': {
+                        transform: 'scale(1.15)',
+                        transition: 'transform 0.3s ease-in-out',
+                        backgroundColor: 'rgba(255, 255, 255, 0.28)'
+                    }
+                }}>
+                    <ListItemIcon><Home sx={{ color: 'white' }} /></ListItemIcon>
+                    <ListItemText primary="Home" sx={{ color: 'white' }} />
                 </ListItemButton>
-                <ListItemButton component={Link} to="/usuarios" sx={{ color: '#fff' }}>
-                    <ListItemIcon><People sx={{ color: '#fff' }} /></ListItemIcon>
-                    <ListItemText primary="Administrar Usuarios" />
+                <ListItemButton component="a" href="/usuarios" sx={{
+                    '&:hover': {
+                        transform: 'scale(1.15)',
+                        transition: 'transform 0.3s ease-in-out',
+                        backgroundColor: 'rgba(255, 255, 255, 0.28)'
+                    }
+                }}>
+                    <ListItemIcon><People sx={{ color: 'white' }} /></ListItemIcon>
+                    <ListItemText primary="Administrar Usuarios" sx={{ color: 'white' }} />
                 </ListItemButton>
-                <ListItemButton component={Link} to="/sensores" sx={{ color: '#fff' }}>
-                    <ListItemIcon><Speed sx={{ color: '#fff' }} /></ListItemIcon>
-                    <ListItemText primary="Administrar Sensores" />
+                <ListItemButton component="a" href="/sensores" sx={{
+                    '&:hover': {
+                        transform: 'scale(1.15)',
+                        transition: 'transform 0.3s ease-in-out',
+                        backgroundColor: 'rgba(255, 255, 255, 0.28)'
+                    }
+                }}>
+                    <ListItemIcon><Speed sx={{ color: 'white' }} /></ListItemIcon>
+                    <ListItemText primary="Administrar Sensores" sx={{ color: 'white' }} />
                 </ListItemButton>
-                <ListItemButton component={Link} to="/riego" sx={{ color: '#fff' }}>
-                    <ListItemIcon><Opacity sx={{ color: '#fff' }} /></ListItemIcon>
-                    <ListItemText primary="Administrar Riego" />
+                <ListItemButton component="a" href="/riego" sx={{
+                    '&:hover': {
+                        transform: 'scale(1.15)',
+                        transition: 'transform 0.3s ease-in-out',
+                        backgroundColor: 'rgba(255, 255, 255, 0.28)'
+                    }
+                }}>
+                    <ListItemIcon><Opacity sx={{ color: 'white' }} /></ListItemIcon>
+                    <ListItemText primary="Administrar Riego" sx={{ color: 'white' }} />
                 </ListItemButton>
-                <ListItemButton component={Link} to="/valvula" sx={{ color: '#fff' }}>
-                    <ListItemIcon><ToggleOn sx={{ color: '#fff' }} /></ListItemIcon>
-                    <ListItemText primary="Administrar Válvulas" />
+                <ListItemButton component="a" href="/valvula" sx={{
+                    '&:hover': {
+                        transform: 'scale(1.15)',
+                        transition: 'transform 0.3s ease-in-out',
+                        backgroundColor: 'rgba(255, 255, 255, 0.28)'
+                    }
+                }}>
+                    <ListItemIcon><ToggleOn sx={{ color: 'white' }} /></ListItemIcon>
+                    <ListItemText primary="Administrar Válvulas" sx={{ color: 'white' }} />
                 </ListItemButton>
-                <ListItemButton component={Link} to="/estadisticas" sx={{ color: '#fff' }}>
-                    <ListItemIcon><BarChart sx={{ color: '#fff' }} /></ListItemIcon>
-                    <ListItemText primary="Ver estadísticas" />
-                </ListItemButton>
-                <ListItemButton onClick={handleLogout} sx={{ color: '#fff' }}>
-                    <ListItemIcon><Logout sx={{ color: '#fff' }} /></ListItemIcon>
-                    <ListItemText primary="Salir" />
+                <ListItemButton onClick={handleLogout} sx={{
+                    '&:hover': {
+                        transform: 'scale(1.15)',
+                        transition: 'transform 0.3s ease-in-out',
+                        backgroundColor: 'rgba(255, 255, 255, 0.28)'
+                    }
+                }}>
+                    <ListItemIcon><Logout sx={{ color: 'white' }} /></ListItemIcon>
+                    <ListItemText primary="Cerrar sesión" sx={{ color: 'white' }} />
                 </ListItemButton>
             </List>
         </Box>
@@ -134,11 +169,18 @@ const ValvulaList = () => {
     if (!usuario) return <p>Cargando...</p>;
 
     return (
-        <Box sx={{ display: 'flex', backgroundColor: '#121212' }}>
-            <AppBar position="fixed" sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px`, backgroundColor: '#333' }}>
-                <Toolbar>
-                    <Typography variant="h6" noWrap component="div" sx={{ color: '#fff' }}>
-                        Dashboard de Administrador
+        <Box
+            sx={{
+                display: 'flex',
+                background: 'white',
+                minHeight: '100vh',
+                color: 'black'
+            }}
+        >
+            <AppBar position="fixed" sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px}`, backgroundColor: '#333' }}>
+                <Toolbar sx={{ color: '#fff', backgroundColor: '#042425' }}>
+                    <Typography variant="h6" noWrap component="div" sx={{ color: '#fff', backgroundColor: '#042425' }}>
+                        Administrar Valvulas
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -151,11 +193,10 @@ const ValvulaList = () => {
                     mt: 8,
                     maxHeight: 'calc(100vh - 64px)',
                     overflowY: 'auto',
-                    backgroundColor: '#121212', // Fondo oscuro
-                    color: '#fff' // Texto blanco
+                    backgroundColor: 'rgba(0, 0, 0, 0.4)'
                 }}
             >
-                <Typography variant="h4" gutterBottom sx={{ textAlign: 'center' }}>Lista de Válvulas</Typography>
+                <Typography variant="h4" gutterBottom sx={{ textAlign: 'center' }}>Lista de Valvulas</Typography>
 
                 <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
                     <TextField
@@ -165,46 +206,44 @@ const ValvulaList = () => {
                         onChange={(e) => setSearchQueryName(e.target.value)}
                         sx={{
                             mr: 2,
-                            backgroundColor: '#2C3E50', // Un tono gris oscuro
-                            color: '#fff', // Letra blanca
+                            backgroundColor: 'rgba(0, 0, 0, 0.5)',
                             width: '300px',
-                            borderRadius: '8px',
+                            borderRadius: '10px',
                             '& .MuiInputBase-root': {
-                                color: '#fff', // Color de la letra en el input
+                                color: 'grey',
                             },
                             '& .MuiOutlinedInput-notchedOutline': {
-                                borderColor: '#34495E', // Color de borde más claro
+                                backgroundColor: 'rgba(0, 0, 0, 0.5)'
                             },
                             '& .MuiInputLabel-root': {
-                                color: '#B0BEC5', // Color claro para la etiqueta
+                                color: '#B0BEC5',
                             },
                             '&:hover .MuiOutlinedInput-notchedOutline': {
-                                borderColor: '#1ABC9C', // Color del borde al pasar el mouse
+                                borderColor: '#1ABC9C',
                             },
                         }}
                     />
-
                     <TextField
                         label="Buscar por Estado"
                         variant="outlined"
                         value={searchQueryStatus}
                         onChange={(e) => setSearchQueryStatus(e.target.value)}
                         sx={{
-                            backgroundColor: '#2C3E50', // Un tono gris oscuro
-                            color: '#fff', // Letra blanca
+                            mr: 2,
+                            backgroundColor: 'rgba(0, 0, 0, 0.5)',
                             width: '300px',
-                            borderRadius: '8px',
+                            borderRadius: '10px',
                             '& .MuiInputBase-root': {
-                                color: '#fff', // Color de la letra en el input
+                                color: 'grey',
                             },
                             '& .MuiOutlinedInput-notchedOutline': {
-                                borderColor: '#34495E', // Color de borde más claro
+                                backgroundColor: 'rgba(0, 0, 0, 0.5)'
                             },
                             '& .MuiInputLabel-root': {
-                                color: '#B0BEC5', // Color claro para la etiqueta
+                                color: '#B0BEC5',
                             },
                             '&:hover .MuiOutlinedInput-notchedOutline': {
-                                borderColor: '#1ABC9C', // Color del borde al pasar el mouse
+                                borderColor: '#1ABC9C',
                             },
                         }}
                     />
@@ -237,13 +276,13 @@ const ValvulaList = () => {
                     component={Paper}
                     sx={{
                         mt: 2,
-                        backgroundColor: '#1E1E1E',
-                        minHeight: '400px',  // Definimos una altura mínima para la tabla
-                        maxHeight: 'calc(100vh - 250px)', // Asegura que no crezca más allá de un límite
-                        overflowY: 'auto',  // Agrega desplazamiento solo si es necesario
+                        backgroundColor: "rgba(54, 129, 78, 0.2)",
+                        minHeight: '400px',
+                        maxHeight: 'calc(100vh - 250px)',
+                        overflowY: 'auto',
                     }}
                 >
-                    <Table sx={{ backgroundColor: '#1E1E1E', color: '#fff' }}>
+                    <Table sx={{ backgroundColor: 'rgba(0, 0, 0, 0.1)', color: '#fff' }}>
                         <TableHead>
                             <TableRow>
                                 <TableCell sx={{ color: '#fff' }}>ID</TableCell>
@@ -257,18 +296,20 @@ const ValvulaList = () => {
                         <TableBody>
                             {currentValvulas.map((valvula) => (
                                 <TableRow key={valvula.id}>
-                                    <TableCell sx={{ color: '#fff' }}>{valvula.id}</TableCell>
-                                    <TableCell sx={{ color: '#fff' }}>{valvula.nombre}</TableCell>
-                                    <TableCell sx={{ color: '#fff' }}>{valvula.ubicacion}</TableCell>
-                                    <TableCell sx={{ color: '#fff' }}>{valvula.estado}</TableCell>
-                                    <TableCell sx={{ color: '#fff' }}>{new Date(valvula.fecha_instalacion).toLocaleDateString()}</TableCell>
+                                    <TableCell sx={{ color: 'black' }}>{valvula.id}</TableCell>
+                                    <TableCell sx={{ color: 'black' }}>{valvula.nombre}</TableCell>
+                                    <TableCell sx={{ color: 'black' }}>{valvula.ubicacion}</TableCell>
+                                    <TableCell sx={{ color: 'black' }}>{valvula.estado}</TableCell>
+                                    <TableCell sx={{ color: 'black' }}>{new Date(valvula.fecha_instalacion).toLocaleDateString()}</TableCell>
                                     <TableCell>
-                                        <IconButton color="primary" onClick={() => redirigirEdicion(valvula.id)}>
-                                            <Edit sx={{ color: '#fff' }} />
-                                        </IconButton>
-                                        <IconButton color="error" onClick={() => handleDelete(valvula.id)}>
-                                            <Delete sx={{ color: '#fff' }} />
-                                        </IconButton>
+                                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                                            <IconButton color="primary" onClick={() => redirigirEdicion(valvula.id)}>
+                                                <Edit sx={{ color: '#fff' }} />
+                                            </IconButton>
+                                            <IconButton color="error" onClick={() => handleDelete(valvula.id)}>
+                                                <Delete sx={{ color: '#fff' }} />
+                                            </IconButton>
+                                        </Box>
                                     </TableCell>
                                 </TableRow>
                             ))}
@@ -321,6 +362,7 @@ const ValvulaList = () => {
                 >
                     Nueva Válvula
                 </Button>
+                <ValvulaGraficas valvulas={valvulas} />
             </Box>
         </Box>
     );

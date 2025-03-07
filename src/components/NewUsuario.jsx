@@ -1,12 +1,19 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "../css/FormularioRegistro.css";
+import { TextField, Button, Box, Typography, Grid, Alert, Zoom, InputAdornment, MenuItem, Select, FormControl, InputLabel } from "@mui/material";
+import { Person, Email, Lock, PersonAdd, CalendarToday, Male, Female, AccountCircle } from "@mui/icons-material";
 
 const NewUsuario = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
-        nombre: "", correo: "", password: "", rol: "Usuario", foto: null, fecha_nacimiento: "", sexo: "Masculino"
+        nombre: "",
+        correo: "",
+        password: "",
+        rol: "Usuario",
+        foto: null,
+        fecha_nacimiento: "",
+        sexo: "Masculino",
     });
     const [error, setError] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
@@ -51,40 +58,208 @@ const NewUsuario = () => {
                 headers: { "Content-Type": "multipart/form-data" },
             });
             setSuccessMessage(response.data.message);
-            setFormData({ nombre: "", correo: "", password: "", rol: "Usuario", foto: null, fecha_nacimiento: "", sexo: "Masculino" });
+            setFormData({
+                nombre: "",
+                correo: "",
+                password: "",
+                rol: "Usuario",
+                foto: null,
+                fecha_nacimiento: "",
+                sexo: "Masculino",
+            });
         } catch (error) {
             setError(error.response ? error.response.data.error : "Error al registrar usuario");
         }
     };
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gray-100">
-            <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
-                <h2 className="text-2xl font-bold mb-4 text-center">Registro</h2>
-                {error && <div className="bg-red-100 text-red-700 p-2 rounded mb-2">{error}</div>}
-                {successMessage && <div className="bg-green-100 text-green-700 p-2 rounded mb-2">{successMessage}</div>}
-                
-                <input type="text" name="nombre" placeholder="Nombre" value={formData.nombre} onChange={handleChange} className="w-full p-2 border rounded mb-2" />
-                <input type="email" name="correo" placeholder="Correo" value={formData.correo} onChange={handleChange} className="w-full p-2 border rounded mb-2" />
-                <input type="password" name="password" placeholder="Contraseña" value={formData.password} onChange={handleChange} className="w-full p-2 border rounded mb-2" />
-                <input type="file" name="foto" onChange={handleFileChange} className="w-full p-2 border rounded mb-2" />
-                <input type="date" name="fecha_nacimiento" value={formData.fecha_nacimiento} onChange={handleChange} className="w-full p-2 border rounded mb-2" />
-                <select name="sexo" value={formData.sexo} onChange={handleChange} className="w-full p-2 border rounded mb-2">
-                    <option value="Masculino">Masculino</option>
-                    <option value="Femenino">Femenino</option>
-                    <option value="Otro">Otro</option>
-                </select>
-                <select name="rol" value={formData.rol} onChange={handleChange} className="w-full p-2 border rounded mb-4">
-                    <option value="Administrador">Administrador</option>
-                    <option value="Usuario">Usuario</option>
-                    <option value="Sistema">Sistema</option>
-                </select>
-                <div className="flex gap-2">
-                    <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition">Registrarse</button>
-                    <button type="button" onClick={handleCancel} className="w-full bg-gray-500 text-white p-2 rounded hover:bg-gray-600 transition">Cancelar</button>
-                </div>
-            </form>
-        </div>
+        <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            minHeight="100vh"
+            sx={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                backgroundImage: "url('https://example.com/your-background-image.jpg')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundAttachment: "fixed",
+                padding: 1,
+                "::before": {
+                    content: '""',
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    backgroundColor: "rgba(0, 0, 0, 0.3)",
+                    zIndex: 2,
+                },
+            }}
+        >
+            <Zoom in={true} timeout={1000}>
+                <Box
+                    sx={{
+                        position: "relative",
+                        zIndex: 3,
+                        width: { xs: "100%", sm: "80%", md: "60%" },
+                        backgroundColor: "rgba(255, 255, 255, 0.8)",
+                        padding: 3,
+                        borderRadius: 3,
+                        backdropFilter: "blur(10px)",
+                    }}
+                >
+                    <Typography variant="h5" gutterBottom textAlign="center" sx={{ color: "#0F2F24" }}>
+                        Registro de Usuario
+                    </Typography>
+
+                    {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
+                    {successMessage && <Alert severity="success" sx={{ mb: 2 }}>{successMessage}</Alert>}
+
+                    <form onSubmit={handleSubmit}>
+                        <Box display="grid" gridTemplateColumns="1fr" gap={2} sx={{ marginBottom: 2 }}>
+                            <TextField
+                                fullWidth
+                                label="Nombre"
+                                value={formData.nombre}
+                                onChange={handleChange}
+                                name="nombre"
+                                required
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <Person />
+                                        </InputAdornment>
+                                    ),
+                                }}
+                            />
+                            <TextField
+                                fullWidth
+                                label="Correo"
+                                value={formData.correo}
+                                onChange={handleChange}
+                                name="correo"
+                                required
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <Email />
+                                        </InputAdornment>
+                                    ),
+                                }}
+                            />
+                            <TextField
+                                fullWidth
+                                label="Contraseña"
+                                type="password"
+                                value={formData.password}
+                                onChange={handleChange}
+                                name="password"
+                                required
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <Lock />
+                                        </InputAdornment>
+                                    ),
+                                }}
+                            />
+                            <TextField
+                                fullWidth
+                                label="Fecha de Nacimiento"
+                                type="date"
+                                value={formData.fecha_nacimiento}
+                                onChange={handleChange}
+                                name="fecha_nacimiento"
+                                required
+                                InputLabelProps={{ shrink: true }}
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <CalendarToday />
+                                        </InputAdornment>
+                                    ),
+                                }}
+                            />
+                            <input
+                                type="file"
+                                name="foto"
+                                onChange={handleFileChange}
+                                required
+                                style={{ display: "none" }}
+                                id="foto"
+                            />
+                            <label htmlFor="foto">
+                                <Button variant="contained" component="span" fullWidth>
+                                    Subir Foto
+                                </Button>
+                            </label>
+                            <FormControl fullWidth required>
+                                <InputLabel>Sexo</InputLabel>
+                                <Select
+                                    name="sexo"
+                                    value={formData.sexo}
+                                    onChange={handleChange}
+                                    startAdornment={<Male />}
+                                    label="Sexo"
+                                >
+                                    <MenuItem value="Masculino">Masculino</MenuItem>
+                                    <MenuItem value="Femenino">Femenino</MenuItem>
+                                    <MenuItem value="Otro">Otro</MenuItem>
+                                </Select>
+                            </FormControl>
+                            <FormControl fullWidth required>
+                                <InputLabel>Rol</InputLabel>
+                                <Select
+                                    name="rol"
+                                    value={formData.rol}
+                                    onChange={handleChange}
+                                    startAdornment={<AccountCircle />}
+                                    label="Rol"
+                                >
+                                    <MenuItem value="Administrador">Administrador</MenuItem>
+                                    <MenuItem value="Usuario">Usuario</MenuItem>
+                                    <MenuItem value="Sistema">Sistema</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Box>
+
+                        <Grid container spacing={2} sx={{ marginTop: 2 }}>
+                            <Grid item xs={6}>
+                                <Button
+                                    type="submit"
+                                    variant="contained"
+                                    color="primary"
+                                    fullWidth
+                                    sx={{
+                                        "&:hover": { backgroundColor: "#44556f" },
+                                    }}
+                                >
+                                    Registrar
+                                </Button>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Button
+                                    variant="outlined"
+                                    color="secondary"
+                                    fullWidth
+                                    onClick={handleCancel}
+                                    sx={{
+                                        "&:hover": { backgroundColor: "#f1f1f1" },
+                                    }}
+                                >
+                                    Cancelar
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </form>
+                </Box>
+            </Zoom>
+        </Box>
     );
 };
 

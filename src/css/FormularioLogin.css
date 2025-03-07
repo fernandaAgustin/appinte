@@ -1,0 +1,136 @@
+/* General container for the login form */
+.login-container {
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Title of the form */
+h2 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 30px;
+}
+
+/* Form elements (inputs and buttons) */
+.input-field {
+    width: 100%;
+    padding: 15px;
+    margin: 12px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #fafafa;
+    box-sizing: border-box;
+    transition: all 0.3s ease-in-out;
+}
+
+.input-field:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+/* Buttons for login and reset */
+.btn-login {
+    width: 100%;
+    padding: 15px;
+    background-color: #3498db;
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-login:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.btn-login:hover:not(:disabled) {
+    background-color: #2980b9;
+    color: white; /* Ensure text is white on hover */
+}
+
+.btn-cancel {
+    width: 100%;
+    padding: 15px;
+    background-color: #5161f1;
+    color: rgb(11, 14, 88);
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-cancel:hover {
+    background-color: #322bc0;
+    color: white; /* Ensure text is white on hover */
+}
+
+/* Error messages */
+.error {
+    color: #3c6ae7;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* Links for the forgot password and registration */
+.forgot-password {
+    background: none;
+    color: #3498db;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    margin-top: 10px;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.forgot-password:hover {
+    color: rgb(0, 81, 255); /* Ensure text is white on hover */
+    text-decoration: underline;
+    background-color: white;
+}
+
+/* Register link */
+.register-link {
+    margin-top: 20px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.register-link a {
+    color: #3498db;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.register-link a:hover {
+    color: rgb(0, 81, 255); /* Ensure text is white on hover */
+    text-decoration: underline;
+}
+
+/* Reset password container */
+.reset-container {
+    padding: 40px;
+    background-color: #fafafa;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+    .login-container, .reset-container {
+        width: 90%;
+    }
+}

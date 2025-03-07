@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { Box, Drawer, AppBar, Toolbar, Typography, IconButton, Avatar, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Pagination, TextField } from '@mui/material';
-import { People, Speed, Opacity, ToggleOn, BarChart, Logout, Add, Delete, Edit } from '@mui/icons-material';
+import { People, Speed, Opacity, ToggleOn, Logout, Add, DeleteForever, BorderColor, Home, ArrowBack, ArrowForward } from '@mui/icons-material';
 import UploadExcel from './UploadExcel';
 import { CloudUpload } from '@mui/icons-material';
-import './estilo.css';
+import backgroundImage from "../img/fondo.jpeg";
+import backgroundImageC from "../img/dash.jpg";
+import UserStats from '../components/UserStats';
 
 const drawerWidth = 240;
 
@@ -15,51 +17,86 @@ const Sidebar = ({ usuario, handleLogout }) => (
         sx={{
             width: drawerWidth,
             flexShrink: 0,
-            backgroundColor: '#212121', // Fondo gris oscuro
             '& .MuiDrawer-paper': {
                 width: drawerWidth,
                 boxSizing: 'border-box',
-                backgroundColor: '#212121', // Fondo gris oscuro
-                color: '#fff', // Texto blanco
+                backgroundImage: `url(${backgroundImage})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundAttachment: "fixed",
+                backgroundRepeat: "no-repeat",
+                color: 'white'
             },
         }}
     >
         <Toolbar />
-        <Box sx={{ overflow: 'auto', color: '#fff' }}>
+        <Box sx={{}}>
             <List>
-                <ListItem>
-                    <Avatar src={`http://localhost:3000/uploads/${usuario.foto}`} alt={usuario.nombre} />
+                <ListItem sx={{ justifyContent: 'center' }}>
+                    <Avatar src={`http://localhost:3000/uploads/${usuario.foto}`} alt={usuario.nombre} sx={{ width: 80, height: 80 }} />
                 </ListItem>
-                <ListItem>
-                    <Typography variant="h6" sx={{ color: '#fff' }}>{usuario.nombre}</Typography>
+                <ListItem sx={{ justifyContent: 'center' }}>
+                    <Typography sx={{ color: 'white', fontWeight: 'bold', }}>{usuario.nombre}</Typography>
                 </ListItem>
-                <ListItemButton component={Link} to="/perfil" sx={{ color: '#fff' }}>
-                    <ListItemIcon><People sx={{ color: '#fff' }} /></ListItemIcon>
-                    <ListItemText primary="Dashboard" />
+                <ListItemButton component="a" href="/perfil" sx={{
+                    '&:hover': {
+                        transform: 'scale(1.15)',
+                        transition: 'transform 0.3s ease-in-out',
+                        backgroundColor: 'rgba(255, 255, 255, 0.28)'
+                    }
+                }}>
+                    <ListItemIcon><Home sx={{ color: 'white' }} /></ListItemIcon>
+                    <ListItemText primary="Home" sx={{ color: 'white' }} />
                 </ListItemButton>
-                <ListItemButton component={Link} to="/usuarios" sx={{ color: '#fff' }}>
-                    <ListItemIcon><People sx={{ color: '#fff' }} /></ListItemIcon>
-                    <ListItemText primary="Administrar Usuarios" />
+                <ListItemButton component="a" href="/usuarios" sx={{
+                    '&:hover': {
+                        transform: 'scale(1.15)',
+                        transition: 'transform 0.3s ease-in-out',
+                        backgroundColor: 'rgba(255, 255, 255, 0.28)'
+                    }
+                }}>
+                    <ListItemIcon><People sx={{ color: 'white' }} /></ListItemIcon>
+                    <ListItemText primary="Administrar Usuarios" sx={{ color: 'white' }} />
                 </ListItemButton>
-                <ListItemButton component={Link} to="/sensores" sx={{ color: '#fff' }}>
-                    <ListItemIcon><Speed sx={{ color: '#fff' }} /></ListItemIcon>
-                    <ListItemText primary="Administrar Sensores" />
+                <ListItemButton component="a" href="/sensores" sx={{
+                    '&:hover': {
+                        transform: 'scale(1.15)',
+                        transition: 'transform 0.3s ease-in-out',
+                        backgroundColor: 'rgba(255, 255, 255, 0.28)'
+                    }
+                }}>
+                    <ListItemIcon><Speed sx={{ color: 'white' }} /></ListItemIcon>
+                    <ListItemText primary="Administrar Sensores" sx={{ color: 'white' }} />
                 </ListItemButton>
-                <ListItemButton component={Link} to="/riego" sx={{ color: '#fff' }}>
-                    <ListItemIcon><Opacity sx={{ color: '#fff' }} /></ListItemIcon>
-                    <ListItemText primary="Administrar Riego" />
+                <ListItemButton component="a" href="/riego" sx={{
+                    '&:hover': {
+                        transform: 'scale(1.15)',
+                        transition: 'transform 0.3s ease-in-out',
+                        backgroundColor: 'rgba(255, 255, 255, 0.28)'
+                    }
+                }}>
+                    <ListItemIcon><Opacity sx={{ color: 'white' }} /></ListItemIcon>
+                    <ListItemText primary="Administrar Riego" sx={{ color: 'white' }} />
                 </ListItemButton>
-                <ListItemButton component={Link} to="/valvula" sx={{ color: '#fff' }}>
-                    <ListItemIcon><ToggleOn sx={{ color: '#fff' }} /></ListItemIcon>
-                    <ListItemText primary="Administrar Válvulas" />
+                <ListItemButton component="a" href="/valvula" sx={{
+                    '&:hover': {
+                        transform: 'scale(1.15)',
+                        transition: 'transform 0.3s ease-in-out',
+                        backgroundColor: 'rgba(255, 255, 255, 0.28)'
+                    }
+                }}>
+                    <ListItemIcon><ToggleOn sx={{ color: 'white' }} /></ListItemIcon>
+                    <ListItemText primary="Administrar Válvulas" sx={{ color: 'white' }} />
                 </ListItemButton>
-                <ListItemButton component={Link} to="/estadisticas" sx={{ color: '#fff' }}>
-                    <ListItemIcon><BarChart sx={{ color: '#fff' }} /></ListItemIcon>
-                    <ListItemText primary="Ver estadísticas" />
-                </ListItemButton>
-                <ListItemButton onClick={handleLogout} sx={{ color: '#fff' }}>
-                    <ListItemIcon><Logout sx={{ color: '#fff' }} /></ListItemIcon>
-                    <ListItemText primary="Salir" />
+                <ListItemButton onClick={handleLogout} sx={{
+                    '&:hover': {
+                        transform: 'scale(1.15)',
+                        transition: 'transform 0.3s ease-in-out',
+                        backgroundColor: 'rgba(255, 255, 255, 0.28)'
+                    }
+                }}>
+                    <ListItemIcon><Logout sx={{ color: 'white' }} /></ListItemIcon>
+                    <ListItemText primary="Cerrar sesión" sx={{ color: 'white' }} />
                 </ListItemButton>
             </List>
         </Box>
@@ -125,12 +162,23 @@ const ListaUsuario = () => {
 
     if (!usuario) return <p>Cargando...</p>;
 
+    const handleChangePage = (event, value) => {
+        setCurrentPage(value);
+    };
+
     return (
-        <Box sx={{ display: 'flex', backgroundColor: '#121212' }}>
-            <AppBar position="fixed" sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px`, backgroundColor: '#333' }}>
-                <Toolbar>
-                    <Typography variant="h6" noWrap component="div" sx={{ color: '#fff' }}>
-                        Dashboard de Administrador
+        <Box
+            sx={{
+                display: 'flex',
+                background: 'white',
+                minHeight: '100vh',
+                color: 'black'
+            }}
+        >
+            <AppBar position="fixed" sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px}`, backgroundColor: '#333' }}>
+                <Toolbar sx={{ color: '#fff', backgroundColor: '#042425' }}>
+                    <Typography variant="h6" noWrap component="div" sx={{ color: '#fff', backgroundColor: '#042425' }}>
+                        Administrar Usuarios
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -143,66 +191,63 @@ const ListaUsuario = () => {
                     mt: 8,
                     maxHeight: 'calc(100vh - 64px)',
                     overflowY: 'auto',
-                    backgroundColor: '#121212', // Fondo oscuro
-                    color: '#fff' // Texto blanco
+                    backgroundColor: 'rgba(0, 0, 0, 0.4)'
                 }}
             >
                 <Typography variant="h4" gutterBottom sx={{ textAlign: 'center' }}>Lista de Usuarios</Typography>
 
                 <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
-                <TextField
-                    label="Buscar por Nombre"
-                    variant="outlined"
-                    value={searchName}
-                    onChange={handleSearchNameChange}
-                    sx={{
-                        mr: 2,
-                        backgroundColor: '#2C3E50', // Un tono gris oscuro
-                        color: '#fff', // Letra blanca
-                        width: '300px',
-                        borderRadius: '8px',
-                        '& .MuiInputBase-root': {
-                            color: '#fff', // Color de la letra en el input
-                        },
-                        '& .MuiOutlinedInput-notchedOutline': {
-                            borderColor: '#34495E', // Color de borde más claro
-                        },
-                        '& .MuiInputLabel-root': {
-                            color: '#B0BEC5', // Color claro para la etiqueta
-                        },
-                        '&:hover .MuiOutlinedInput-notchedOutline': {
-                            borderColor: '#1ABC9C', // Color del borde al pasar el mouse
-                        },
-                    }}
-                />
+                    <TextField
+                        label="Buscar por Nombre"
+                        variant="outlined"
+                        value={searchName}
+                        onChange={handleSearchNameChange}
+                        sx={{
+                            mr: 2,
+                            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                            width: '300px',
+                            borderRadius: '10px',
+                            '& .MuiInputBase-root': {
+                                color: 'grey',
+                            },
+                            '& .MuiOutlinedInput-notchedOutline': {
+                                backgroundColor: 'rgba(0, 0, 0, 0.5)'
+                            },
+                            '& .MuiInputLabel-root': {
+                                color: '#B0BEC5',
+                            },
+                            '&:hover .MuiOutlinedInput-notchedOutline': {
+                                borderColor: '#1ABC9C',
+                            },
+                        }}
+                    />
 
-                <TextField
-                    label="Buscar por Rol"
-                    variant="outlined"
-                    value={searchRole}
-                    onChange={handleSearchRoleChange}
-                    sx={{
-                        backgroundColor: '#2C3E50', // Un tono gris oscuro
-                        color: '#fff', // Letra blanca
-                        width: '300px',
-                        borderRadius: '8px',
-                        '& .MuiInputBase-root': {
-                            color: '#fff', // Color de la letra en el input
-                        },
-                        '& .MuiOutlinedInput-notchedOutline': {
-                            borderColor: '#34495E', // Color de borde más claro
-                        },
-                        '& .MuiInputLabel-root': {
-                            color: '#B0BEC5', // Color claro para la etiqueta
-                        },
-                        '&:hover .MuiOutlinedInput-notchedOutline': {
-                            borderColor: '#1ABC9C', // Color del borde al pasar el mouse
-                        },
-                    }}
-                />
+                    <TextField
+                        label="Buscar por Rol"
+                        variant="outlined"
+                        value={searchRole}
+                        onChange={handleSearchRoleChange}
+                        sx={{
+                            mr: 2,
+                            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                            width: '300px',
+                            borderRadius: '10px',
+                            '& .MuiInputBase-root': {
+                                color: 'grey',
+                            },
+                            '& .MuiOutlinedInput-notchedOutline': {
+                                backgroundColor: 'rgba(0, 0, 0, 0.5)'
+                            },
+                            '& .MuiInputLabel-root': {
+                                color: '#B0BEC5',
+                            },
+                            '&:hover .MuiOutlinedInput-notchedOutline': {
+                                borderColor: '#1ABC9C',
+                            },
+                        }}
+                    />
                 </Box>
 
-                {/* Botón de Subir Excel */}
                 <UploadExcel
                     onUploadSuccess={() => axios.get("http://localhost:3000/api/usuarios/").then(response => setUsuarios(response.data))}
                     sx={{
@@ -211,12 +256,12 @@ const ListaUsuario = () => {
                         justifyContent: 'center',
                         width: '100%',
                         '& .MuiButton-root': {
-                            backgroundColor: '#2C3E50', // Un tono gris oscuro
+                            backgroundColor: '#2C3E50',
                             color: '#fff',
                             padding: '10px 20px',
                             borderRadius: '8px',
                             '&:hover': {
-                                backgroundColor: '#34495E', // Un gris más oscuro al hacer hover
+                                backgroundColor: '#34495E',
                             },
                         },
                     }}
@@ -229,40 +274,42 @@ const ListaUsuario = () => {
                     component={Paper}
                     sx={{
                         mt: 2,
-                        backgroundColor: '#1E1E1E',
-                        minHeight: '400px',  // Definimos una altura mínima para la tabla
-                        maxHeight: 'calc(100vh - 250px)', // Asegura que no crezca más allá de un límite
-                        overflowY: 'auto',  // Agrega desplazamiento solo si es necesario
+                        backgroundColor: "rgba(54, 129, 78, 0.2)",
+                        minHeight: '400px',
+                        maxHeight: 'calc(100vh - 250px)',
+                        overflowY: 'auto',
                     }}
                 >
-                    <Table className="user-table" sx={{ backgroundColor: '#1E1E1E', color: '#fff' }}>
+                    <Table sx={{ backgroundColor: "rgba(0, 0, 0, 0.1)", color: 'black', borderCollapse: 'collapse'  }}>
                         <TableHead>
-                            <TableRow>
-                                <TableCell sx={{ color: '#fff' }}>ID</TableCell>
-                                <TableCell sx={{ color: '#fff' }}>Nombre</TableCell>
-                                <TableCell sx={{ color: '#fff' }}>Correo</TableCell>
-                                <TableCell sx={{ color: '#fff' }}>Rol</TableCell>
-                                <TableCell sx={{ color: '#fff' }}>Fecha de Nacimiento</TableCell>
-                                <TableCell sx={{ color: '#fff' }}>Sexo</TableCell>
-                                <TableCell sx={{ color: '#fff' }}>Acciones</TableCell>
+                            <TableRow sx={{ backgroundColor: 'transparent' }}>
+                                <TableCell sx={{ color: '#fff', fontWeight: 'bold', backgroundColor: '#04242' }}>ID</TableCell>
+                                <TableCell sx={{ color: '#fff', fontWeight: 'bold', backgroundColor: '#04242' }}>Nombre</TableCell>
+                                <TableCell sx={{ color: '#fff', fontWeight: 'bold', backgroundColor: '#04242' }}>Correo</TableCell>
+                                <TableCell sx={{ color: '#fff', fontWeight: 'bold', backgroundColor: '#04242' }}>Rol</TableCell>
+                                <TableCell sx={{ color: '#fff', fontWeight: 'bold', backgroundColor: '#04242' }}>Fecha de Nacimiento</TableCell>
+                                <TableCell sx={{ color: '#fff', fontWeight: 'bold', backgroundColor: '#04242' }}>Sexo</TableCell>
+                                <TableCell sx={{ color: '#fff', fontWeight: 'bold', backgroundColor: '#04242t' }}>Acciones</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {currentUsuarios.map(usuario => (
-                                <TableRow key={usuario.id}>
-                                    <TableCell sx={{ color: '#fff' }}>{usuario.id}</TableCell>
-                                    <TableCell sx={{ color: '#fff' }}>{usuario.nombre}</TableCell>
-                                    <TableCell sx={{ color: '#fff' }}>{usuario.correo}</TableCell>
-                                    <TableCell sx={{ color: '#fff' }}>{usuario.rol}</TableCell>
-                                    <TableCell sx={{ color: '#fff' }}>{new Date(usuario.fecha_nacimiento).toLocaleDateString()}</TableCell>
-                                    <TableCell sx={{ color: '#fff' }}>{usuario.sexo}</TableCell>
-                                    <TableCell>
-                                        <IconButton color="error" onClick={() => handleDelete(usuario.id)}>
-                                            <Delete sx={{ color: '#fff' }} />
-                                        </IconButton>
-                                        <IconButton color="primary" component={Link} to={`/editUsuarios/${usuario.id}`}>
-                                            <Edit sx={{ color: '#fff' }} />
-                                        </IconButton>
+                                <TableRow key={usuario.id} sx={{ backgroundColor: 'transparent' }}>
+                                    <TableCell sx={{ color: 'black', backgroundColor: 'transparent' }}>{usuario.id}</TableCell>
+                                    <TableCell sx={{ color: 'black', backgroundColor: 'transparent' }}>{usuario.nombre}</TableCell>
+                                    <TableCell sx={{ color: 'black', backgroundColor: 'transparent' }}>{usuario.correo}</TableCell>
+                                    <TableCell sx={{ color: 'black', backgroundColor: 'transparent' }}>{usuario.rol}</TableCell>
+                                    <TableCell sx={{ color: 'black', backgroundColor: 'transparent' }}>{new Date(usuario.fecha_nacimiento).toLocaleDateString()}</TableCell>
+                                    <TableCell sx={{ color: 'black', backgroundColor: 'transparent' }}>{usuario.sexo}</TableCell>
+                                    <TableCell sx={{ backgroundColor: 'transparent' }}>
+                                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                                            <IconButton color="primary" component={Link} to={`/editUsuarios/${usuario.id}`}>
+                                                <BorderColor sx={{ color: 'white' }} />
+                                            </IconButton>
+                                            <IconButton color="error" onClick={() => handleDelete(usuario.id)}>
+                                                <DeleteForever sx={{ color: 'white' }} />
+                                            </IconButton>
+                                        </Box>
                                     </TableCell>
                                 </TableRow>
                             ))}
@@ -270,29 +317,18 @@ const ListaUsuario = () => {
                     </Table>
                 </TableContainer>
 
-                <Pagination
-                    count={totalPages}
-                    page={currentPage}
-                    onChange={(e, value) => setCurrentPage(value)}
-                    sx={{
-                        mt: 4, // Added margin-top for better spacing
-                        display: 'flex',
-                        justifyContent: 'center', // Center the pagination
-                        alignItems: 'center',
-                        backgroundColor: '#2C3E50',
-                        color: '#fff',
-                        borderRadius: '8px',
-                        '& .MuiPaginationItem-root': {
-                            backgroundColor: '#34495E',
-                            color: '#fff',
-                            borderRadius: '8px',
-                            padding: '10px 20px', // Increase padding for a better button size
-                            '&:hover': {
-                                backgroundColor: '#1ABC9C',
-                            },
-                        },
-                    }}
-                />
+                {/* Paginación con el componente Pagination */}
+                <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+                    <Typography variant="body1" sx={{ marginRight: 2 }}>
+                        Página {currentPage} de {totalPages}
+                    </Typography>
+                    <Pagination
+                        count={totalPages}
+                        page={currentPage}
+                        onChange={handleChangePage}
+                        color="primary"
+                    />
+                </Box>
 
                 <Button
                     variant="contained"
@@ -300,10 +336,10 @@ const ListaUsuario = () => {
                     component={Link}
                     to="/nuevoU"
                     sx={{
-                        mt: 4, // Added margin-top for better spacing
-                        backgroundColor: '#2C3E50',
+                        mt: 4,
+                        backgroundColor: '#042425',
                         color: '#fff',
-                        padding: '12px 24px', // Increased padding for better button size
+                        padding: '12px 24px',
                         borderRadius: '8px',
                         display: 'flex',
                         justifyContent: 'center',
@@ -315,6 +351,7 @@ const ListaUsuario = () => {
                 >
                     Nuevo Usuario
                 </Button>
+                <UserStats usuarios={usuarios} />
             </Box>
         </Box>
     );

@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import "../css/FormularioRegistro.css";
+import { TextField, Button, MenuItem, Select, InputLabel, FormControl, Box, CircularProgress, InputAdornment } from "@mui/material";
+import { AccountCircle, Email, Lock, Cake, Male, Female, Person } from "@mui/icons-material";
+import { Fade } from '@mui/material';
 
 const UsuarioEdit = () => {
     const { id } = useParams();
@@ -9,23 +11,23 @@ const UsuarioEdit = () => {
     const [formData, setFormData] = useState({
         nombre: "",
         correo: "",
-        password: "", // Contraseña vacía por defecto
+        password: "",
         rol: "Usuario",
         fecha_nacimiento: "",
         sexo: "Masculino",
-        foto: null, // Foto no editable
+        foto: null,
     });
     const [error, setError] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
+    const [loading, setLoading] = useState(false);
 
-    // Obtener los datos del usuario al cargar el formulario
     useEffect(() => {
+        setLoading(true);
         axios
             .get(`http://localhost:3000/api/usuarios/${id}`)
             .then((response) => {
                 const userData = response.data;
 
-                // Asegurarse de que la fecha esté en formato YYYY-MM-DD
                 if (userData.fecha_nacimiento) {
                     userData.fecha_nacimiento = new Date(userData.fecha_nacimiento)
                         .toISOString()
@@ -35,14 +37,15 @@ const UsuarioEdit = () => {
                 setFormData({
                     nombre: userData.nombre,
                     correo: userData.correo,
-                    password: "", // No mostrar la contraseña actual
+                    password: "",
                     rol: userData.rol,
                     fecha_nacimiento: userData.fecha_nacimiento,
                     sexo: userData.sexo,
-                    foto: userData.foto, // Mostrar foto actual (no editable)
+                    foto: userData.foto,
                 });
             })
-            .catch((error) => console.error(error));
+            .catch((error) => console.error(error))
+            .finally(() => setLoading(false));
     }, [id]);
 
     const handleChange = (e) => {
@@ -50,7 +53,7 @@ const UsuarioEdit = () => {
     };
 
     const handleCancel = () => {
-        navigate("/usuarios"); // Redirige a la página principal
+        navigate(-1);
     };
 
     const isPasswordValid = (password) => {
@@ -61,118 +64,171 @@ const UsuarioEdit = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Verificar que todos los campos obligatorios estén completos
         if (!formData.nombre || !formData.correo || !formData.fecha_nacimiento || !formData.sexo || !formData.rol) {
             setError("Todos los campos son obligatorios.");
             return;
         }
 
-        // Validar la contraseña solo si se ha introducido una nueva
         if (formData.password && !isPasswordValid(formData.password)) {
             setError("La contraseña debe tener al menos 10 caracteres, incluyendo mayúsculas, minúsculas, números y símbolos.");
             return;
         }
 
-        setError(""); // Limpiar mensaje de error
-        setSuccessMessage(""); // Limpiar mensaje de éxito
+        setError("");
+        setSuccessMessage("");
 
-        // Crear un nuevo objeto FormData
         const formDataToSend = new FormData();
 
-        // Asegurarse de no enviar la contraseña si no se ha cambiado
         Object.entries(formData).forEach(([key, value]) => {
-            if (key !== "foto") { // No agregar el campo foto
+            if (key !== "foto") {
                 formDataToSend.append(key, value);
             }
         });
 
+        setLoading(true);
         try {
             const response = await axios.put(`http://localhost:3000/api/usuarios/${id}`, formDataToSend, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
             setSuccessMessage(response.data.message);
-            setTimeout(() => navigate("/usuarios"), 2000); // Redirige después de la actualización
+            navigate(-1);
         } catch (error) {
             setError(error.response ? error.response.data.error : "Error al actualizar usuario");
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gray-100">
-            <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
-                <h2 className="text-2xl font-bold mb-4 text-center">Editar Usuario</h2>
-                {error && <div className="bg-red-100 text-red-700 p-2 rounded mb-2">{error}</div>}
-                {successMessage && <div className="bg-green-100 text-green-700 p-2 rounded mb-2">{successMessage}</div>}
-
-                <input
-                    type="text"
-                    name="nombre"
-                    placeholder="Nombre"
-                    value={formData.nombre}
-                    onChange={handleChange}
-                    className="w-full p-2 border rounded mb-2"
-                />
-                <input
-                    type="email"
-                    name="correo"
-                    placeholder="Correo"
-                    value={formData.correo}
-                    onChange={handleChange}
-                    className="w-full p-2 border rounded mb-2"
-                />
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="Contraseña (dejar vacía para no cambiar)"
-                    value={formData.password}
-                    onChange={handleChange}
-                    className="w-full p-2 border rounded mb-2"
-                />
-                <input
-                    type="date"
-                    name="fecha_nacimiento"
-                    value={formData.fecha_nacimiento}
-                    onChange={handleChange}
-                    className="w-full p-2 border rounded mb-2"
-                />
-                <select
-                    name="sexo"
-                    value={formData.sexo}
-                    onChange={handleChange}
-                    className="w-full p-2 border rounded mb-2"
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', backgroundColor: '#f5f5f5' }}>
+            <Fade in={true} timeout={1000}>
+                <Box
+                    component="form"
+                    onSubmit={handleSubmit}
+                    sx={{
+                        backgroundColor: 'white',
+                        padding: 4,
+                        borderRadius: 2,
+                        boxShadow: 3,
+                        width: '100%',
+                        maxWidth: 400,
+                        transition: 'transform 0.5s ease',
+                        '&:hover': {
+                            transform: 'scale(1.05)',
+                        },
+                    }}
                 >
-                    <option value="Masculino">Masculino</option>
-                    <option value="Femenino">Femenino</option>
-                    <option value="Otro">Otro</option>
-                </select>
-                <select
-                    name="rol"
-                    value={formData.rol}
-                    onChange={handleChange}
-                    className="w-full p-2 border rounded mb-4"
-                >
-                    <option value="Administrador">Administrador</option>
-                    <option value="Usuario">Usuario</option>
-                    <option value="Sistema">Sistema</option>
-                </select>
+                    <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Editar Usuario</h2>
+                    {error && <Box sx={{ backgroundColor: '#f8d7da', color: '#721c24', padding: 2, marginBottom: 2, borderRadius: 1 }}>{error}</Box>}
+                    {successMessage && <Box sx={{ backgroundColor: '#d4edda', color: '#155724', padding: 2, marginBottom: 2, borderRadius: 1 }}>{successMessage}</Box>}
 
-                <div className="flex gap-2">
-                    <button
-                        type="submit"
-                        className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition"
-                    >
-                        Actualizar
-                    </button>
-                    <button
-                        type="button"
-                        onClick={handleCancel}
-                        className="w-full bg-gray-500 text-white p-2 rounded hover:bg-gray-600 transition"
-                    >
-                        Cancelar
-                    </button>
-                </div>
-            </form>
-        </div>
+                    <TextField
+                        label="Nombre"
+                        name="nombre"
+                        value={formData.nombre}
+                        onChange={handleChange}
+                        fullWidth
+                        required
+                        sx={{ marginBottom: 2 }}
+                        InputProps={{
+                            startAdornment: <InputAdornment position="start"><AccountCircle /></InputAdornment>,
+                        }}
+                    />
+
+                    <TextField
+                        label="Correo"
+                        name="correo"
+                        type="email"
+                        value={formData.correo}
+                        onChange={handleChange}
+                        fullWidth
+                        required
+                        sx={{ marginBottom: 2 }}
+                        InputProps={{
+                            startAdornment: <InputAdornment position="start"><Email /></InputAdornment>,
+                        }}
+                    />
+
+                    <TextField
+                        label="Contraseña (dejar vacía para no cambiar)"
+                        name="password"
+                        type="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        fullWidth
+                        sx={{ marginBottom: 2 }}
+                        InputProps={{
+                            startAdornment: <InputAdornment position="start"><Lock /></InputAdornment>,
+                        }}
+                    />
+
+                    <TextField
+                        label="Fecha de Nacimiento"
+                        name="fecha_nacimiento"
+                        type="date"
+                        value={formData.fecha_nacimiento}
+                        onChange={handleChange}
+                        fullWidth
+                        required
+                        sx={{ marginBottom: 2 }}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        InputProps={{
+                            startAdornment: <InputAdornment position="start"><Cake /></InputAdornment>,
+                        }}
+                    />
+
+                    <FormControl fullWidth required sx={{ marginBottom: 2 }}>
+                        <InputLabel>Sexo</InputLabel>
+                        <Select
+                            name="sexo"
+                            value={formData.sexo}
+                            onChange={handleChange}
+                        >
+                            <MenuItem value="Masculino"><Male /> Masculino</MenuItem>
+                            <MenuItem value="Femenino"><Female /> Femenino</MenuItem>
+                            <MenuItem value="Otro"><Person /> Otro</MenuItem>
+                        </Select>
+                    </FormControl>
+
+                    <FormControl fullWidth required sx={{ marginBottom: 2 }}>
+                        <InputLabel>Rol</InputLabel>
+                        <Select
+                            name="rol"
+                            value={formData.rol}
+                            onChange={handleChange}
+                        >
+                            <MenuItem value="Administrador">Administrador</MenuItem>
+                            <MenuItem value="Usuario">Usuario</MenuItem>
+                            <MenuItem value="Sistema">Sistema</MenuItem>
+                        </Select>
+                    </FormControl>
+
+                    <Box sx={{ display: 'flex', gap: 2 }}>
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            fullWidth
+                            disabled={loading}
+                        >
+                            {loading ? <CircularProgress size={24} /> : 'Actualizar'}
+                        </Button>
+                        <Button
+                            type="button"
+                            variant="outlined"
+                            color="secondary"
+                            fullWidth
+                            onClick={handleCancel}
+                            disabled={loading}
+                        >
+                            Cancelar
+                        </Button>
+                    </Box>
+                </Box>
+            </Fade>
+        </Box>
     );
 };
 

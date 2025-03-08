@@ -18,6 +18,7 @@ import RePage from "./pages/RePage";
 import RlPage from "./pages/RlPage";
 import RrPage from "./pages/RrPage";
 import PruebaPage from "./pages/PuebaPage";
+import ValvulaGraficas from "./components/valvulas/ValvulaGraficas";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
@@ -39,6 +40,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Route path="/riego" element={<RlPage />} />
       <Route path="/nuevoRiego" element={<RrPage />} />
       <Route path="/prueba" element={<PruebaPage />} />
+      <Route path="/graficas" element={<ValvulaGraficas />} />
     </Routes>
   </BrowserRouter>
 );
